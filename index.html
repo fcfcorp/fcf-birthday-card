@@ -58,6 +58,7 @@
       overflow: hidden;
       perspective: 1100px;
       --letter-out-y: -292px;
+      cursor: pointer;
     }
 
     .letter {
@@ -311,29 +312,13 @@
       }
     }
 
-    .actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn {
-      min-height: 42px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0 16px;
+    .click-prompt {
+      margin: -10px 0 0;
       color: var(--ink);
-      background: rgba(255, 255, 255, 0.88);
-      cursor: pointer;
+      font-size: 18px;
       font-weight: 850;
-      box-shadow: 0 8px 22px rgba(24, 35, 55, 0.08);
-    }
-
-    .btn.primary {
-      color: #fff;
-      background: var(--ink);
-      border-color: var(--ink);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     @media (max-width: 850px) {
@@ -384,7 +369,7 @@
   <main class="app">
     <section class="stage" aria-label="Birthday card">
       <div class="demo">
-        <div class="scene" id="scene">
+        <div class="scene" id="scene" role="button" tabindex="0" aria-label="Open birthday letter">
           <article class="letter" aria-live="polite">
             <div class="letter-art">
               <img class="card-logo" src="assets/FCF_WFM_Logo_Web_V2.png" alt="First Capital Financial">
@@ -406,18 +391,13 @@
           </div>
         </div>
 
-        <div class="actions">
-          <button class="btn primary" type="button" id="openBtn">Open letter</button>
-          <button class="btn" type="button" id="resetBtn">Reset</button>
-        </div>
+        <p class="click-prompt">click!</p>
       </div>
     </section>
   </main>
 
   <script>
     const scene = document.getElementById("scene");
-    const openBtn = document.getElementById("openBtn");
-    const resetBtn = document.getElementById("resetBtn");
     const cardHeadline = document.getElementById("cardHeadline");
     let layerTimer;
 
@@ -441,14 +421,13 @@
       layerTimer = setTimeout(() => scene.classList.add("paper-front"), 1900);
     }
 
-    function resetLetter() {
-      clearTimeout(layerTimer);
-      scene.classList.remove("playing");
-      scene.classList.remove("paper-front");
-    }
-
-    openBtn.addEventListener("click", playLetter);
-    resetBtn.addEventListener("click", resetLetter);
+    scene.addEventListener("click", playLetter);
+    scene.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        playLetter();
+      }
+    });
     personalizeCard();
   </script>
 </body>
