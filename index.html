@@ -72,7 +72,7 @@
       border-radius: 8px;
       overflow: hidden;
       background: #fff;
-      box-shadow: 0 26px 70px rgba(24, 35, 55, 0.2);
+      box-shadow: none;
       transform: translateX(-50%) translateY(205px) scale(0.82);
       transform-origin: center bottom;
     }
@@ -156,7 +156,7 @@
       z-index: 1;
       border-radius: 0 0 8px 8px;
       background: #d4aa5f;
-      box-shadow: 0 26px 70px rgba(24, 35, 55, 0.18);
+      box-shadow: none;
     }
 
     .flap {
@@ -170,7 +170,7 @@
       transform: translateX(-50%) rotateX(0deg);
       transform-origin: top center;
       transform-style: preserve-3d;
-      filter: drop-shadow(0 10px 14px rgba(24, 35, 55, 0.12));
+      filter: none;
     }
 
     .flap::before,
@@ -203,9 +203,7 @@
       pointer-events: none;
       background: var(--envelope);
       clip-path: polygon(0 0, 50% 59%, 100% 0, 100% 100%, 0 100%);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        0 -1px 0 rgba(24, 35, 55, 0.08);
+      box-shadow: none;
     }
 
     .front::before,
@@ -227,7 +225,7 @@
       padding: 12px;
       background: #fff;
       border: 2px solid var(--ink);
-      box-shadow: 0 10px 24px rgba(24, 35, 55, 0.16);
+      box-shadow: none;
     }
 
     .seal img {
@@ -265,11 +263,11 @@
     @keyframes flapOpen {
       0% {
         transform: translateX(-50%) rotateX(0deg);
-        filter: drop-shadow(0 10px 14px rgba(24, 35, 55, 0.12));
+        filter: none;
       }
       100% {
         transform: translateX(-50%) rotateX(180deg);
-        filter: drop-shadow(0 -10px 16px rgba(24, 35, 55, 0.1));
+        filter: none;
       }
     }
 
