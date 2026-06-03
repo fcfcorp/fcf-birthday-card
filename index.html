@@ -381,7 +381,7 @@
           <article class="letter" aria-live="polite">
             <div class="letter-art">
               <img class="card-logo" src="assets/FCF_WFM_Logo_Web_V2.png" alt="First Capital Financial">
-              <h1 id="cardHeadline">Happy birthday, TEST</h1>
+              <h1 id="cardHeadline">Happy birthday</h1>
             </div>
             <div class="letter-message">
               <p id="cardMessage">Wishing you a wonderful birthday and a great year ahead.</p>
@@ -409,7 +409,19 @@
     const scene = document.getElementById("scene");
     const openBtn = document.getElementById("openBtn");
     const resetBtn = document.getElementById("resetBtn");
+    const cardHeadline = document.getElementById("cardHeadline");
     let layerTimer;
+
+    function getRecipientName() {
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get("name") || params.get("firstName");
+      return name ? name.trim().slice(0, 40) : "";
+    }
+
+    function personalizeCard() {
+      const name = getRecipientName();
+      cardHeadline.textContent = name ? `Happy birthday, ${name}` : "Happy birthday";
+    }
 
     function playLetter() {
       clearTimeout(layerTimer);
@@ -428,6 +440,7 @@
 
     openBtn.addEventListener("click", playLetter);
     resetBtn.addEventListener("click", resetLetter);
+    personalizeCard();
   </script>
 </body>
 </html>
