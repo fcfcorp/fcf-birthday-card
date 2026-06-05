@@ -93,17 +93,31 @@
       position: absolute;
       left: 50%;
       top: 58%;
-      width: 38%;
+      width: 44%;
       margin: 0;
       padding: 0.12em 0;
       transform: translate(-50%, -50%);
       text-align: center;
-      background: rgba(255, 255, 255, 0.92);
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(20px, 4vw, 34px);
       font-style: italic;
       line-height: 1;
       font-weight: 600;
+      color: var(--ink);
+    }
+
+    .card-advisor {
+      position: absolute;
+      left: 50%;
+      top: 86%;
+      width: 48%;
+      margin: 0;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(10px, 1.8vw, 16px);
+      line-height: 1.25;
+      font-weight: 500;
       color: var(--ink);
     }
 
@@ -339,8 +353,9 @@
       <div class="demo">
         <div class="scene" id="scene" role="button" tabindex="0" aria-label="Open birthday letter">
           <article class="letter" aria-live="polite">
-            <img class="card-image" src="assets/Generated image_ Elegant corporate birthday greeting card.png" alt="Happy birthday from First Capital Financial">
+            <img class="card-image" src="assets/birthday-card-template.png" alt="Happy birthday from First Capital Financial">
             <h1 class="card-name" id="cardHeadline">there,</h1>
+            <p class="card-advisor" id="cardAdvisor">From First Capital Financial</p>
           </article>
 
           <div class="envelope" aria-hidden="true">
@@ -359,6 +374,7 @@
   <script>
     const scene = document.getElementById("scene");
     const cardHeadline = document.getElementById("cardHeadline");
+    const cardAdvisor = document.getElementById("cardAdvisor");
     let layerTimer;
 
     function getRecipientName() {
@@ -367,9 +383,17 @@
       return name ? name.trim().slice(0, 40) : "";
     }
 
+    function getAdvisorName() {
+      const params = new URLSearchParams(window.location.search);
+      const advisor = params.get("advisor") || params.get("advisorName") || params.get("from");
+      return advisor ? advisor.trim().slice(0, 60) : "";
+    }
+
     function personalizeCard() {
       const name = getRecipientName();
+      const advisor = getAdvisorName();
       cardHeadline.textContent = name ? `${name},` : "there,";
+      cardAdvisor.textContent = advisor ? `From ${advisor}` : "From First Capital Financial";
     }
 
     function playLetter() {
