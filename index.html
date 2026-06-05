@@ -88,12 +88,6 @@
       background: #fff;
     }
 
-    .card-logo {
-      width: min(46%, 170px);
-      height: auto;
-      display: block;
-    }
-
     h1 {
       margin: 0;
       max-width: 16ch;
@@ -215,14 +209,10 @@
       background: #fff;
       border: 2px solid var(--ink);
       box-shadow: none;
-    }
-
-    .seal img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      transform: translate(1.5px, -1px);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      font-weight: 700;
     }
 
     .scene.playing .flap {
@@ -359,7 +349,6 @@
         <div class="scene" id="scene" role="button" tabindex="0" aria-label="Open birthday letter">
           <article class="letter" aria-live="polite">
             <div class="letter-art">
-              <img class="card-logo" src="assets/FCF_WFM_Logo_Web_V2.png" alt="First Capital Financial">
               <h1 id="cardHeadline">Happy birthday</h1>
             </div>
             <div class="letter-message">
@@ -373,9 +362,7 @@
             <div class="flap"></div>
           </div>
           <div class="front" aria-hidden="true"></div>
-          <div class="seal" aria-hidden="true">
-            <img src="assets/FCFLOGO.png" alt="">
-          </div>
+          <div class="seal" aria-hidden="true">FCF</div>
         </div>
 
         <p class="click-prompt">click!</p>
