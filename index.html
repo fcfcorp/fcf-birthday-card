@@ -72,7 +72,7 @@
       bottom: 0;
       z-index: 10;
       width: min(84vw, 460px);
-      min-height: 300px;
+      aspect-ratio: 1484 / 1060;
       border: 1px solid rgba(40, 64, 80, 0.14);
       border-radius: 4px;
       overflow: hidden;
@@ -82,15 +82,29 @@
       transform-origin: center bottom;
     }
 
-    .letter-art {
-      min-height: 170px;
-      display: grid;
-      align-content: center;
-      justify-items: center;
-      gap: 18px;
-      padding: 34px 34px 20px;
+    .card-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-name {
+      position: absolute;
+      left: 50%;
+      top: 58%;
+      width: 38%;
+      margin: 0;
+      padding: 0.12em 0;
+      transform: translate(-50%, -50%);
       text-align: center;
-      background: var(--paper);
+      background: rgba(255, 255, 255, 0.92);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(20px, 4vw, 34px);
+      font-style: italic;
+      line-height: 1;
+      font-weight: 600;
+      color: var(--ink);
     }
 
     h1 {
@@ -101,30 +115,6 @@
       line-height: 1.08;
       font-weight: 700;
       color: var(--ink);
-    }
-
-    .letter-message {
-      padding: 0 34px 34px;
-      display: grid;
-      gap: 12px;
-      text-align: center;
-      color: var(--ink);
-      background: var(--paper);
-      border-top: 0;
-    }
-
-    .letter-message p {
-      margin: 0;
-      font-family: inherit;
-      font-size: 16px;
-      line-height: 1.45;
-      color: rgba(40, 64, 80, 0.72);
-    }
-
-    .signature {
-      color: rgba(83, 86, 91, 0.88);
-      font-size: 12px;
-      font-weight: 700;
     }
 
     .envelope {
@@ -321,11 +311,7 @@
       }
 
       .letter {
-        min-height: 286px;
-      }
-
-      .letter-art {
-        min-height: 168px;
+        min-height: 0;
       }
 
       .envelope {
@@ -353,13 +339,8 @@
       <div class="demo">
         <div class="scene" id="scene" role="button" tabindex="0" aria-label="Open birthday letter">
           <article class="letter" aria-live="polite">
-            <div class="letter-art">
-              <h1 id="cardHeadline">Happy birthday</h1>
-            </div>
-            <div class="letter-message">
-              <p id="cardMessage">Wishing you a wonderful birthday and a great year ahead.</p>
-              <div class="signature" id="cardSignature">From all of us at First Capital Financial</div>
-            </div>
+            <img class="card-image" src="assets/Generated image_ Elegant corporate birthday greeting card.png" alt="Happy birthday from First Capital Financial">
+            <h1 class="card-name" id="cardHeadline">there,</h1>
           </article>
 
           <div class="envelope" aria-hidden="true">
@@ -388,7 +369,7 @@
 
     function personalizeCard() {
       const name = getRecipientName();
-      cardHeadline.textContent = name ? `Happy birthday, ${name}` : "Happy birthday";
+      cardHeadline.textContent = name ? `${name},` : "there,";
     }
 
     function playLetter() {
