@@ -390,7 +390,7 @@
 
     function getAdvisorName() {
       const params = new URLSearchParams(window.location.search);
-      const advisor = params.get("advisor") || params.get("advisorName") || params.get("from");
+      const advisor = params.get("advisorname") || params.get("advisorName") || params.get("advisor") || params.get("from");
       return advisor ? advisor.trim().slice(0, 60) : "";
     }
 
