@@ -109,8 +109,8 @@
     .card-advisor {
       position: absolute;
       left: 50%;
-      top: 86%;
-      width: 48%;
+      top: 85%;
+      width: 54%;
       margin: 0;
       transform: translate(-50%, -50%);
       text-align: center;
@@ -119,6 +119,14 @@
       line-height: 1.25;
       font-weight: 500;
       color: var(--ink);
+    }
+
+    .advisor-team {
+      display: block;
+      margin-top: 0.12em;
+      color: var(--green);
+      font-size: 1.35em;
+      font-style: italic;
     }
 
     h1 {
@@ -363,7 +371,10 @@
           <article class="letter" aria-live="polite">
             <img class="card-image" src="assets/birthday-card-template.png" alt="Happy birthday from First Capital Financial">
             <h1 class="card-name" id="cardHeadline">there</h1>
-            <p class="card-advisor" id="cardAdvisor">From First Capital Financial</p>
+            <p class="card-advisor">
+              <span id="cardAdvisor">From your advisor and the rest of the</span>
+              <span class="advisor-team">First Capital Team.</span>
+            </p>
           </article>
 
           <div class="envelope" aria-hidden="true">
@@ -403,7 +414,9 @@
       const name = getRecipientName();
       const advisor = getAdvisorName();
       cardHeadline.textContent = name || "there";
-      cardAdvisor.textContent = advisor ? `From ${advisor}` : "From First Capital Financial";
+      cardAdvisor.textContent = advisor
+        ? `From ${advisor} and the rest of the`
+        : "From your advisor and the rest of the";
     }
 
     function playLetter() {
