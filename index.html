@@ -245,18 +245,23 @@
     .seal {
       position: absolute;
       left: 50%;
-      bottom: 90px;
+      bottom: 100px;
       z-index: 20;
-      width: 88px;
-      height: 88px;
+      width: 68px;
+      height: 68px;
       border-radius: 999px;
       display: grid;
       place-items: center;
       transform: translateX(-50%);
-      padding: 12px;
-      background: var(--white);
-      border: 2px solid var(--ink);
-      box-shadow: 0 8px 18px rgba(40, 64, 80, 0.08);
+      padding: 10px;
+      background:
+        var(--paper-grain),
+        linear-gradient(180deg, #eee7d7, #ddd2b9);
+      background-blend-mode: soft-light, normal;
+      border: 1px solid rgba(160, 144, 88, 0.58);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.48),
+        0 3px 7px rgba(40, 64, 80, 0.12);
     }
 
     .seal img {
@@ -269,6 +274,8 @@
       object-fit: contain;
       object-position: center;
       transform: translateX(1px);
+      filter: sepia(0.18) saturate(0.72) contrast(0.9);
+      opacity: 0.86;
     }
 
     .scene.playing .flap {
@@ -389,7 +396,7 @@
       }
 
       .seal {
-        bottom: 64px;
+        bottom: 74px;
       }
     }
   </style>
