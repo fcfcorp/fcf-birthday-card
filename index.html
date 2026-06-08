@@ -171,8 +171,7 @@
       z-index: 1;
       border-radius: 0 0 8px 8px;
       background:
-        repeating-linear-gradient(8deg, transparent 0 3px, rgba(255, 255, 255, 0.08) 3px 4px),
-        repeating-linear-gradient(97deg, transparent 0 5px, rgba(40, 64, 80, 0.025) 5px 6px),
+        radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.2), transparent 48%),
         linear-gradient(145deg, #e9e2d1, var(--envelope-inside) 58%, #ddd3bc);
       border: 1px solid rgba(160, 144, 88, 0.2);
       box-shadow: 0 16px 34px rgba(40, 64, 80, 0.1);
@@ -201,16 +200,14 @@
 
     .flap::before {
       background:
-        repeating-linear-gradient(8deg, transparent 0 3px, rgba(255, 255, 255, 0.1) 3px 4px),
-        repeating-linear-gradient(97deg, transparent 0 5px, rgba(40, 64, 80, 0.025) 5px 6px),
+        radial-gradient(circle at 30% 15%, rgba(255, 255, 255, 0.22), transparent 52%),
         linear-gradient(180deg, #f4f0e7, var(--envelope-dark));
       opacity: 1;
     }
 
     .flap::after {
       background:
-        repeating-linear-gradient(8deg, transparent 0 3px, rgba(255, 255, 255, 0.08) 3px 4px),
-        repeating-linear-gradient(97deg, transparent 0 5px, rgba(40, 64, 80, 0.025) 5px 6px),
+        radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.2), transparent 48%),
         linear-gradient(145deg, #e9e2d1, var(--envelope-inside) 58%, #ddd3bc);
       opacity: 0;
     }
@@ -227,8 +224,7 @@
       overflow: hidden;
       pointer-events: none;
       background:
-        repeating-linear-gradient(8deg, transparent 0 3px, rgba(255, 255, 255, 0.1) 3px 4px),
-        repeating-linear-gradient(97deg, transparent 0 5px, rgba(40, 64, 80, 0.025) 5px 6px),
+        radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.24), transparent 52%),
         linear-gradient(145deg, #f5f1e8, var(--envelope) 60%, #e5dcc8);
       clip-path: polygon(0 0, 50% 59%, 100% 0, 100% 100%, 0 100%);
       box-shadow:
