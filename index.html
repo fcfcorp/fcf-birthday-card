@@ -362,7 +362,7 @@
         <div class="scene" id="scene" role="button" tabindex="0" aria-label="Open birthday letter">
           <article class="letter" aria-live="polite">
             <img class="card-image" src="assets/birthday-card-template.png" alt="Happy birthday from First Capital Financial">
-            <h1 class="card-name" id="cardHeadline">there,</h1>
+            <h1 class="card-name" id="cardHeadline">there</h1>
             <p class="card-advisor" id="cardAdvisor">From First Capital Financial</p>
           </article>
 
@@ -402,7 +402,7 @@
     function personalizeCard() {
       const name = getRecipientName();
       const advisor = getAdvisorName();
-      cardHeadline.textContent = name ? `${name},` : "there,";
+      cardHeadline.textContent = name || "there";
       cardAdvisor.textContent = advisor ? `From ${advisor}` : "From First Capital Financial";
     }
 
