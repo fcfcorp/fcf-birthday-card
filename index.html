@@ -94,16 +94,19 @@
       position: absolute;
       left: 50%;
       top: 59%;
-      width: 44%;
+      width: 72%;
+      max-width: none;
       margin: 0;
       padding: 0.12em 0;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scaleX(var(--fit-scale, 1));
+      transform-origin: center;
       text-align: center;
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(20px, 4vw, 34px);
       font-style: italic;
       line-height: 1;
       font-weight: 600;
+      white-space: nowrap;
       color: var(--ink);
     }
 
@@ -130,9 +133,10 @@
       position: absolute;
       left: 50%;
       top: 82%;
-      width: 56%;
+      width: 72%;
       margin: 0;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scaleX(var(--fit-scale, 1));
+      transform-origin: center;
       text-align: center;
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(7px, 1.15vw, 11px);
@@ -143,6 +147,7 @@
 
     .card-advisor span {
       display: block;
+      white-space: nowrap;
     }
 
     h1 {
@@ -413,7 +418,7 @@
               <span>Wishing you a year full of happiness</span>
               <span>and many more wonderful memories ahead.</span>
             </p>
-            <p class="card-advisor">
+            <p class="card-advisor" id="cardAdvisorGroup">
               <span id="cardAdvisor">From your advisor and</span>
               <span>the rest of the</span>
             </p>
@@ -438,18 +443,66 @@
     const scene = document.getElementById("scene");
     const cardHeadline = document.getElementById("cardHeadline");
     const cardAdvisor = document.getElementById("cardAdvisor");
+    const cardAdvisorGroup = document.getElementById("cardAdvisorGroup");
     let layerTimer;
 
     function getRecipientName() {
       const params = new URLSearchParams(window.location.search);
       const name = params.get("name") || params.get("firstName");
-      return name ? name.trim().slice(0, 40) : "";
+      return normalizeParameter(name, 80);
     }
 
     function getAdvisorName() {
       const params = new URLSearchParams(window.location.search);
       const advisor = params.get("advisorname") || params.get("advisorName") || params.get("advisor") || params.get("from");
-      return advisor ? advisor.trim().slice(0, 60) : "";
+      return normalizeParameter(advisor, 100);
+    }
+
+    function normalizeParameter(value, maxLength) {
+      if (!value) {
+        return "";
+      }
+
+      const normalized = value.trim().replace(/\s+/g, " ");
+      return Array.from(normalized).slice(0, maxLength).join("");
+    }
+
+    function fitSingleLine(element, maxSize, minSize) {
+      element.style.setProperty("--fit-scale", 1);
+      element.style.fontSize = `${maxSize}px`;
+      const availableWidth = element.clientWidth;
+      const contentWidth = element.scrollWidth;
+
+      if (contentWidth > availableWidth) {
+        const fittedSize = Math.max(minSize, maxSize * availableWidth / contentWidth * 0.98);
+        element.style.fontSize = `${fittedSize}px`;
+      }
+
+      if (element.scrollWidth > availableWidth) {
+        element.style.setProperty("--fit-scale", availableWidth / element.scrollWidth * 0.98);
+      }
+    }
+
+    function fitLineGroup(container, maxSize, minSize) {
+      container.style.setProperty("--fit-scale", 1);
+      container.style.fontSize = `${maxSize}px`;
+      const availableWidth = container.clientWidth;
+      let longestLine = Math.max(...Array.from(container.children, (line) => line.scrollWidth));
+
+      if (longestLine > availableWidth) {
+        const fittedSize = Math.max(minSize, maxSize * availableWidth / longestLine * 0.98);
+        container.style.fontSize = `${fittedSize}px`;
+      }
+
+      longestLine = Math.max(...Array.from(container.children, (line) => line.scrollWidth));
+      if (longestLine > availableWidth) {
+        container.style.setProperty("--fit-scale", availableWidth / longestLine * 0.98);
+      }
+    }
+
+    function fitPersonalizedText() {
+      fitSingleLine(cardHeadline, 34, 9);
+      fitLineGroup(cardAdvisorGroup, 11, 5.5);
     }
 
     function personalizeCard() {
@@ -459,6 +512,7 @@
       cardAdvisor.textContent = advisor
         ? `From ${advisor} and`
         : "From your advisor and";
+      fitPersonalizedText();
     }
 
     function playLetter() {
@@ -477,7 +531,9 @@
         playLetter();
       }
     });
+    window.addEventListener("resize", fitPersonalizedText);
     personalizeCard();
+    document.fonts?.ready.then(fitPersonalizedText);
   </script>
 </body>
 </html>
